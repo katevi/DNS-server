@@ -1,6 +1,7 @@
 Homework for telecom course at St. Petersburg State University.
 
 **Simple DNS-server with blacklist**
+
 Provides the user with the ability to specify in `config.json` file next settings:
 - DNS-server to redirect requests
 - domain names for which getting ip will be prohibited
