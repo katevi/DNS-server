@@ -1,7 +1,7 @@
 import socket
 import json
 
-with open('config.json', 'r') as f:
+with open('settings.json', 'r') as f:
     config = json.load(f)
 
 IP = config['server_ip']
