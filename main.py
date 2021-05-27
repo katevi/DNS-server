@@ -81,7 +81,7 @@ def run_server():
             sock.sendto(response, (ip, port))
         else:
             response = response_black_list(message, ip)
-            sock.sendto(response, ip, port)
+            sock.sendto(response, (ip, port))
 
 
 if __name__ == '__main__':
