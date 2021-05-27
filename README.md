@@ -9,6 +9,6 @@ Provides the user with the ability to specify in `config.json` file next setting
 
 You can test it with standard utility `nslookup` in Windows, or `dig` in Unix-based systems. Taking `127.0.0.1` as server address from `config.json`, following examples presents interaction with DNS-server via utilits, written above:
  - `nslookup vk.com 127.0.0.1`
- - `dig vk.com 127.0.0.1`
+ - `dig vk.com @127.0.0.1`
 
 Feel free to contribute!
