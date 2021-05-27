@@ -45,14 +45,20 @@ def response_out_from_black_list(message, address, port):
         sock.close()
     return data
 
+
 def response_black_list(message, ip):
     packet = b''
     domain = get_domain(message[12:])
     if domain:
-        packet += message[:2] + b'\x80\x05'
-        packet += message[4:6] + message[4:6] + b'\x00\x00\x00\x00'  # Questions and Answers Counts
-        packet += message[12:]  # Original Domain Name Question
-        packet += b'\xc0\x0c'  # Pointer to domain name
+        # header section
+        packet += message[:2] + b'\x80\x05'  # 05 - response code refused, other parameters 0
+        packet += message[4:6] + message[4:6] + b'\x00\x00\x00\x00'  # number of questions entries, answers entries
+        # questions section
+        packet += message[12:]  # a domain name represented as a sequence of labels,
+        # where each label consists of a length octet followed by that
+        # number of octets
+        # record section
+        packet += b'\xc0\x0c'  # a domain name to which this resource record pertains
         packet += b'\x00\x01\x00\x01\x00\x00\x00\x3c\x00\x04'  # Response type, ttl and resource data length -> 4 bytes
         packet += str.join('', map(lambda x: chr(int(x)), ip.split('.'))).encode('latin')  # 4bytes of IP
     return packet
